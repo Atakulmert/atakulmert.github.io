@@ -7,9 +7,39 @@
     <title>Mert Atakul - React Native Developer</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
+<style>
+    body {
+        transition: background 1s linear;
+    }
+</style>
 
 <body class="bg-gradient-to-b from-purple-700 via-pink-500 to-red-500 text-black font-sans">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setInterval(function () {
+                changeGradient();
+            }, 5000); // Change color every 5 seconds for a smoother transition
 
+            function changeGradient() {
+                const randomColor1 = getRandomColor();
+                const randomColor2 = getRandomColor();
+                const randomColor3 = getRandomColor();
+                const randomColor4 = getRandomColor();
+                const randomColor5 = getRandomColor();
+
+                document.body.style.background = `linear-gradient(to bottom, ${randomColor1}, ${randomColor2}, ${randomColor3},${randomColor4},${randomColor5})`;
+            }
+
+            function getRandomColor() {
+                const letters = '0123456789ABCDEF';
+                let color = '#';
+                for (let i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+                return color;
+            }
+        });
+    </script>
     <header class="text-center py-8">
         <h1 class="text-4xl font-bold"> Mert Atakul </h1>
         <p class="text-lg">🕹️ Game Developer / React Native Developer 📱</p>
@@ -38,7 +68,8 @@
                 <li>Taking responsibilities of Mobile 2D Shooting Game</li>
                 <li>Building a Dynamic structure for Game</li>
                 <li>Ensuring connection and data exchange between the game and SQLite database</li>
-
+                <li> 🎮Game: Hit The Wheel (<a href="https://play.google.com/store/apps/details?id=com.otilab.HitTheWheel&hl=en_US" target="_blank" class="underline">Android</a>) (<a href="https://apps.apple.com/tr/app/hit-the-wheel-set-the-fire/id6473615537" target="_blank" class="underline">iOS</a>)</li>
+        
             </ul>
         </div>
         <div class="mb-6">
