@@ -45,7 +45,6 @@ export const ui = {
   mobile: { tr: 'Mobil', en: 'Mobile' },
   web: { tr: 'Web / Frontend', en: 'Web / Frontend' },
   shared: { tr: 'State & API (mobil + web)', en: 'State & API (mobile + web)' },
-  other: { tr: 'Diğer Diller', en: 'Other Languages' },
   spoken: { tr: 'Konuşulan Diller', en: 'Spoken Languages' },
   strengths: { tr: 'Güçlü Yönler', en: 'Strengths' },
   cantDisable: { tr: 'Bu yetenek kapatılamaz 😄', en: 'This skill can’t be turned off 😄' },

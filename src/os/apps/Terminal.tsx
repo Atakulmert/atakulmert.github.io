@@ -61,7 +61,6 @@ export function Terminal() {
           `📱 ${t(ui.mobile)}: ${skills.mobile.join(', ')}`,
           `🌐 ${t(ui.web)}: ${skills.web.join(', ')}`,
           `${t(ui.shared)}: ${skills.shared.join(', ')}`,
-          `${t(ui.other)}: ${skills.other.join(', ')}`,
           `${t(ui.spoken)}: ${skills.languages.map((l) => `${t(l.name)} (${t(l.level)})`).join(', ')}`,
         )
       case 'education':

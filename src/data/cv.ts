@@ -187,7 +187,6 @@ export const skills = {
   mobile: ['React Native', 'Firebase Analytics', 'Google Maps API', 'Deeplinks', 'App Store / Google Play CI/CD', 'SQLite'],
   web: ['React', 'JavaScript', 'HTML', 'CSS'],
   shared: ['Redux', 'Axios'], // hem mobilde hem web'de
-  other: ['C#', 'C++'],
   languages: [
     { name: { tr: 'Türkçe', en: 'Turkish' }, level: { tr: 'Ana dil', en: 'Native' }, value: 1 },
     { name: { tr: 'İngilizce', en: 'English' }, level: { tr: 'İleri', en: 'Proficient' }, value: 0.85 },

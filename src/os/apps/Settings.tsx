@@ -108,9 +108,6 @@ export function Settings() {
       <h3 className="section-label">{t(ui.shared)}</h3>
       <SkillRows items={skills.shared} offset={5} onNope={nope} />
 
-      <h3 className="section-label">{t(ui.other)}</h3>
-      <SkillRows items={skills.other} offset={6} onNope={nope} />
-
       <h3 className="section-label">{t(ui.spoken)}</h3>
       <section className="card list">
         {skills.languages.map((l) => (
