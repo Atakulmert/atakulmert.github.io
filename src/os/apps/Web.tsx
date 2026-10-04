@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { profile, skills } from '../../data/cv'
 import { ui } from '../../i18n'
 import { haptic, useOS, useT } from '../../store'
+import { AppHeader } from '../AppHost'
 import { Glyph } from '../icons'
 
 // Telefonun içinde küçük bir tarayıcı: frontend tarafını gösteren mini bir web sitesi
@@ -135,32 +136,34 @@ export function Web() {
 
   return (
     <div className="web">
-      <div className="w-urlbar">
-        <button
-          className="w-close"
-          onClick={() => {
-            haptic()
-            close()
-          }}
-          aria-label={t(ui.back)}
-        >
-          {Glyph.chevron()}
-        </button>
-        <span className="w-url">
-          <span className="w-lock">🔒</span> localhost:5173
-        </span>
-        <button
-          className={`w-src ${source ? 'on' : ''}`}
-          onClick={() => {
-            haptic()
-            setSource(!source)
-          }}
-          aria-label={t(source ? ui.hideSource : ui.viewSource)}
-        >
-          {'</>'}
-        </button>
-        <span className={`w-progress ${loaded ? 'done' : ''}`} onAnimationEnd={() => setLoaded(true)} />
-      </div>
+      <AppHeader>
+        <div className="w-urlbar">
+          <button
+            className="w-close"
+            onClick={() => {
+              haptic()
+              close()
+            }}
+            aria-label={t(ui.back)}
+          >
+            {Glyph.chevron()}
+          </button>
+          <span className="w-url">
+            <span className="w-lock">🔒</span> localhost:5173
+          </span>
+          <button
+            className={`w-src ${source ? 'on' : ''}`}
+            onClick={() => {
+              haptic()
+              setSource(!source)
+            }}
+            aria-label={t(source ? ui.hideSource : ui.viewSource)}
+          >
+            {'</>'}
+          </button>
+          <span className={`w-progress ${loaded ? 'done' : ''}`} onAnimationEnd={() => setLoaded(true)} />
+        </div>
+      </AppHeader>
 
       {source ? (
         <div className="w-page">

@@ -699,6 +699,7 @@
 .app-scroll {
   position: absolute;
   inset: 0;
+  z-index: 0; /* kendi katmanı: içerideki z-index'ler (Wallet kartları) başlığın üstüne çıkamaz */
   overflow-y: auto;
   overflow-x: hidden;
   overscroll-behavior: contain;
@@ -714,20 +715,29 @@
   -webkit-user-select: text;
 }
 
-.navbar {
-  position: sticky;
+/* Sabit başlık katmanı (scroll alanının dışında, bkz. AppHost) */
+.app-header {
+  position: absolute;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 5;
-  margin: 0 -16px;
-  padding: 54px 10px 8px;
+}
+.navbar {
+  padding: 50px 6px 4px;
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  background: rgba(242, 242, 247, 0.94);
+  background: #f2f2f7;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.08);
 }
 .nav-back {
   display: flex;
   align-items: center;
+  /* iPhone'da ekran ölçeklendiğinde de rahat dokunulsun diye geniş dokunma alanı */
+  min-height: 48px;
+  min-width: 96px;
+  padding: 0 8px 0 0 !important;
   color: #0a84ff !important;
   font-size: 17px !important;
   justify-self: start;
@@ -1129,8 +1139,8 @@
 }
 
 /* Messages */
-.messages .navbar {
-  background: rgba(248, 248, 250, 0.95);
+.app-messages .navbar {
+  background: #f8f8fa;
 }
 .nav-mail svg {
   width: 26px;
@@ -1239,11 +1249,12 @@
   background: #0b0b0c;
   color: #e5e5e5;
 }
-.terminal .navbar {
-  background: rgba(11, 11, 12, 0.95);
+.app-terminal .navbar {
+  background: #0b0b0c;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
   color: #fff;
 }
-.terminal .nav-back {
+.app-terminal .nav-back {
   color: #30d158 !important;
 }
 .term-body {
@@ -1282,20 +1293,20 @@
   margin: 0 -16px;
 }
 .w-urlbar {
-  position: sticky;
-  top: 0;
-  z-index: 5;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 8px;
   padding: 54px 12px 10px;
-  background: rgba(246, 246, 248, 0.96);
+  background: #f6f6f8;
   border-bottom: 0.5px solid #d8d8dc;
 }
 .screen .w-close {
   color: #0a84ff;
   display: grid;
   place-items: center;
+  min-width: 44px;
+  min-height: 44px;
 }
 .w-url {
   flex: 1;
