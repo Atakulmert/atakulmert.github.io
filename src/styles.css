@@ -159,3 +159,17 @@ body {
     font-size: 16px;
   }
 }
+
+/* ── Dokunmatik cihazlarda telefon ekranı (bkz. three/screenOverlay.ts) ── */
+.tracked-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 390px;
+  height: 844px;
+  transform-origin: 0 0;
+  z-index: 10; /* canvas'ın üstünde, HUD'un (20) altında */
+  opacity: 0; /* ilk karede Phone konumlandırana kadar gizli */
+  transition: opacity 0.2s;
+  cursor: default;
+}

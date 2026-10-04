@@ -4,7 +4,9 @@ import { ui } from './i18n'
 import { PhoneOS, SCREEN_PX } from './os/PhoneOS'
 import { haptic, useOS, useT } from './store'
 import { attachControls } from './three/controls'
-import { isCompact, Scene } from './three/Scene'
+import { screenOverlay, useTrackedScreen } from './three/screenOverlay'
+import { Scene } from './three/Scene'
+import { isCompact, useWidth } from './viewport'
 import './styles.css'
 
 const hasWebGL = () => {
@@ -16,14 +18,20 @@ const hasWebGL = () => {
   }
 }
 
-const useWidth = () => {
-  const [w, setW] = useState(() => window.innerWidth)
+/** Dokunmatik / dar ekranda telefon ekranı: 3D telefonun üstüne 2D olarak oturtulan katman (bkz. screenOverlay.ts) */
+function TrackedScreen() {
+  const ref = useRef<HTMLDivElement>(null)
   useEffect(() => {
-    const on = () => setW(window.innerWidth)
-    window.addEventListener('resize', on)
-    return () => window.removeEventListener('resize', on)
+    screenOverlay.el = ref.current
+    return () => {
+      screenOverlay.el = null
+    }
   }, [])
-  return w
+  return (
+    <div ref={ref} className="tracked-screen">
+      <PhoneOS />
+    </div>
+  )
 }
 
 function Hud() {
@@ -92,6 +100,7 @@ export default function App() {
   const stage = useRef<HTMLDivElement>(null)
   const [webgl] = useState(hasWebGL)
   const lang = useOS((s) => s.lang)
+  const tracked = useTrackedScreen(useWidth())
 
   useEffect(() => {
     document.documentElement.lang = lang
@@ -107,6 +116,7 @@ export default function App() {
     <div ref={stage} className="stage">
       <Scene portal={stage} />
       <Hud />
+      {tracked && <TrackedScreen />}
     </div>
   )
 }

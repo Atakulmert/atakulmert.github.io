@@ -40,13 +40,13 @@ src/
     Scene.tsx         Canvas, ışıklar, kamera/telefon hareketi
     Phone.tsx         Prosedürel telefon modeli + arka kapak çıkartmaları + <Html> ekran
     controls.ts       Sürükleyerek döndürme, ön/arka yüze oturma
-    gyro.ts           Mobilde jiroskopla eğme
+    screenOverlay.ts  Dokunmatik cihazlarda ekranı 2D katman olarak 3D telefonun üstüne oturtma
 ```
 
 ## Davranışlar
 
 - **Masaüstü:** Telefonu sürükleyerek döndür (bırakınca ön ya da arka yüze oturur). Fareyle hafif parallax var. Uygulama açılınca kamera yaklaşır. `Esc` uygulamayı kapatır.
-- **Mobil:** Kilit açılınca kamera yaklaşır ve sanal ekran gerçek ekranı doldurur. Jiroskop (iOS'ta izin ister) ile eğim ve Android'de titreşim var.
+- **Mobil / dokunmatik:** Kilit açılınca kamera yaklaşır ve sanal ekran gerçek ekranı doldurur. Ekran 3D CSS yerine 2D bir katman olarak telefonun üstüne oturtulur, çünkü iOS Safari 3D dönüşümlü DOM'u kaydırarak çiziyor ve dokunuşları kaçırıyor. Android'de titreşim var.
 - **WebGL yoksa:** Aynı arayüz düz bir CSS telefon çerçevesinde gösterilir.
 
 ## Yayınlama

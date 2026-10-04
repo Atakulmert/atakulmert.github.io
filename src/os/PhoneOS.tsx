@@ -2,7 +2,6 @@ import { forwardRef, useEffect, useRef, useState, type PointerEvent as RPointerE
 import { notifications, profile } from '../data/cv'
 import { appNames, ui } from '../i18n'
 import { haptic, useOS, useT, type AppId } from '../store'
-import { requestGyro } from '../three/gyro'
 import { Glyph } from './icons'
 import { HomeScreen } from './HomeScreen'
 import { AppHost } from './AppHost'
@@ -100,7 +99,6 @@ function LockScreen() {
 
   const doUnlock = (then?: AppId) => {
     if (scanning) return
-    requestGyro()
     haptic(12)
     setScanning(true)
     setTimeout(() => {
