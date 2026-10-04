@@ -7,6 +7,7 @@ import { attachControls } from './three/controls'
 import { screenOverlay, useTrackedScreen } from './three/screenOverlay'
 import { Scene } from './three/Scene'
 import { isCompact, useWidth } from './viewport'
+import { DebugPanel } from './Debug'
 import './styles.css'
 
 const hasWebGL = () => {
@@ -36,7 +37,8 @@ function TrackedScreen() {
 
 function Hud() {
   const t = useT()
-  const { lang, setLang, flipped, flip, locked } = useOS()
+  const { lang, setLang, flipped, flip, locked, toggleDebug } = useOS()
+  const taps = useRef<number[]>([])
   const compact = isCompact(useWidth())
   // Mobilde kilit açılınca ekran tamamen telefona ait; HUD gizlenir
   const hidden = compact && !locked
@@ -44,7 +46,18 @@ function Hud() {
   return (
     <div className={`hud ${hidden ? 'hud-hidden' : ''}`}>
       <header className="hud-top">
-        <div className="hud-name">
+        <div
+          className="hud-name"
+          onPointerDown={() => {
+            // 2 saniye içinde 5 dokunuş → teşhis paneli
+            const now = Date.now()
+            taps.current = [...taps.current.filter((t) => now - t < 2000), now]
+            if (taps.current.length >= 5) {
+              taps.current = []
+              toggleDebug()
+            }
+          }}
+        >
           <b>{profile.name}</b>
           <span>
             {t(profile.title)} · {t(profile.focus)}
@@ -69,6 +82,7 @@ function Hud() {
           </button>
         </div>
       </header>
+      <span className="hud-build">{__BUILD_ID__}</span>
       <p className="hud-hint">
         {t(ui.hintDrag)} · {t(ui.hintTap)}
       </p>
@@ -100,6 +114,7 @@ export default function App() {
   const stage = useRef<HTMLDivElement>(null)
   const [webgl] = useState(hasWebGL)
   const lang = useOS((s) => s.lang)
+  const debug = useOS((s) => s.debug)
   const tracked = useTrackedScreen(useWidth())
 
   useEffect(() => {
@@ -117,6 +132,7 @@ export default function App() {
       <Scene portal={stage} />
       <Hud />
       {tracked && <TrackedScreen />}
+      {debug && <DebugPanel />}
     </div>
   )
 }

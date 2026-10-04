@@ -11,6 +11,8 @@ type State = {
   app: AppId | null
   origin: Origin
   flipped: boolean // telefon arkası görünüyor mu
+  debug: boolean // gizli teşhis paneli (HUD'daki isme 5 dokunuş)
+  toggleDebug: () => void
   setLang: (l: Lang) => void
   unlock: () => void
   lock: () => void
@@ -36,6 +38,8 @@ export const useOS = create<State>((set) => ({
   app: null,
   origin: { x: 195, y: 422 },
   flipped: false,
+  debug: false,
+  toggleDebug: () => set((s) => ({ debug: !s.debug })),
   setLang: (lang) => {
     try {
       localStorage.setItem('lang', lang)

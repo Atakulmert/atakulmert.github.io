@@ -173,3 +173,42 @@ body {
   transition: opacity 0.2s;
   cursor: default;
 }
+
+/* ── Teşhis (bkz. Debug.tsx) ── */
+.hud-name {
+  pointer-events: auto;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.hud-build {
+  position: absolute;
+  right: 10px;
+  bottom: max(6px, env(safe-area-inset-bottom));
+  font: 10px ui-monospace, Menlo, monospace;
+  opacity: 0.3;
+}
+.dbg-panel {
+  position: fixed;
+  top: env(safe-area-inset-top, 0px);
+  left: 0;
+  right: 0;
+  z-index: 100;
+  margin: 0;
+  padding: 8px 10px;
+  background: rgba(0, 0, 0, 0.82);
+  color: #7dffa0;
+  font: 11px/1.4 ui-monospace, Menlo, monospace;
+  white-space: pre;
+  overflow: hidden;
+  pointer-events: none;
+}
+.dbg-dot {
+  position: fixed;
+  z-index: 101;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 50%;
+  opacity: 0.75;
+  pointer-events: none;
+}
